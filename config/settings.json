@@ -1,0 +1,10 @@
+{
+  "data_dir": "data",
+  "coords_csv": "data/对象坐标表.csv",
+  "plan_pdf": "data/平面图-模型.pdf",
+  "host": "127.0.0.1",
+  "port": 8765,
+  "sim_end": 432000,
+  "warmup": 7200,
+  "bin_seconds": 60
+}

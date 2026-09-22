@@ -1,0 +1,14 @@
+# 运行产物 / 可再生物
+cache/
+dist/
+build/
+*.spec
+__pycache__/
+*.pyc
+*.log
+
+# 本地杂物
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini
