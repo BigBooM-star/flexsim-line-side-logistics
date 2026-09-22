@@ -1,4 +1,7 @@
-# 线边物料配送 · 可视化与成本测算软件（参赛作品演示端）
+# FlexSim 线边物料配送 · 数字孪生可视化与成本测算
+
+**FlexSim Line-Side Material Delivery Simulation & Cost Analytics for Automotive Final Assembly**
+—— 汽车总装车间 AGV 配送四组对照实验的参赛作品演示端：动态安全库存（Dynamic Safety Stock, SS_t）vs 静态参数、离线数字孪生回放、解析公式 × 迷你离散事件仿真双引擎测算。
 
 安徽省"人工智能+物流"方案设计赛配套软件（MIT 开源）。与数据汇报一起呈现：
 **四组对照实验的实测可视化 + 补货参数即时测算（解析公式 × 迷你离散事件仿真双引擎）+ 成本口径联动 + SS_t 闭环导出**。
