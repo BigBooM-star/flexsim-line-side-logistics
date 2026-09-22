@@ -1,0 +1,38 @@
+# 线边物料配送 · 可视化与成本测算软件（line-side-logistics）
+
+> 安徽省"人工智能+物流"方案设计赛参赛作品（MIT）。汽车总装车间线边物料配送的四组对照实验：证明"把补货参数变活"（动态 SS_t）相对静态参数的价值。本仓库含全部代码与 FlexSim 原始实验数据，可离线复现每一个数字。
+
+## 核心事实（v3 口径）
+
+- 四组实验：组1 逐件拉动 / 组2 定时补满 / 组3 固定 SS=1 / 组4 动态 SS_t（XGBoost 参与回归 R²=0.020，诚实呈现；价值论证靠对照实验而非黑箱）
+- 线边库存均值 59.474 / 54.002 / 20.650 / 23.250 件；小车行驶段数 2581 / 1296 / 1118 / 1299；产出恒 1291 台；四组缺料停线 = 0
+- 组4 vs 组3 唯一干净对照：库存 +12.6%、段数 +16.2%（严约束过配代价），真实价值 = **线边触零 972 → 120 库·分钟（−87%）**
+- 压力工况组 5.1（消耗×1.5，外部效度）：静态 SS 触零 ×2.25，安全边际被吃穿
+- 成本模型四段式：运输 + 库存持有 + 人工(常数) + 缺料停线；单价为行业占位值，全字段可编辑
+
+## 技术栈
+
+- 后端 Python 3.11 + FastAPI + pandas/numpy；前端原生 ES Module + 本地化 ECharts（零外链）
+- 双测算引擎：闭式解析公式（<50ms）+ 迷你离散事件仿真（heapq，复刻组3 逻辑，三种子标定偏差 ≤6%）
+- 数据管道：15 万行/组的 FlexSim 事件日志 → OnEntry/OnExit 库存重建（常数标定至报表，min/max ≤±1）→ 预计算 JSON 缓存
+- 分发：`start.bat` 源码跑 或 `python tools/make_dist.py` 免安装绿包（PyInstaller，271MB 含数据）
+
+## 运行
+
+```bash
+pip install -r requirements.txt
+python run.py          # http://127.0.0.1:8765 全离线
+python tools/verify_data.py   # 核对原始文件 vs 缓存 vs 本文数字
+```
+
+## 目录
+
+- `data/` — FlexSim 原始日志与报表（lab*.csv / summaryreport*.csv / statereport*.csv）
+- `app/` — ingest 解析 / sim 双引擎 / api 六路由 / precompute 缓存
+- `static/` — 五页前端（看板 / 回放 / 测算 / 口径 / 闭环）
+- `tools/` — verify_data.py 数据核对 · make_dist.py 绿包
+- `.claude/skills/line-side-logistics/SKILL.md` — 给 AI 编程助手的仓库工作指南
+
+## AI 助手注意
+
+改动请遵守口径红线：不声称省人工、成本单价仅占位、主四组与压力组严格隔离（标定/距离表只用主四组）。仓库级技能文件会被 Claude Code 自动加载。

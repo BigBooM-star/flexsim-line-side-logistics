@@ -56,6 +56,12 @@ exe 免装 Python、免联网，对方**双击「启动演示.bat」**即用；`
 - **迷你仿真标定**：组3 参数 ×3 种子，等效轮询 1800s / 单车容量 4 箱（标定旋钮，等效≠FlexSim 原值，已在页面声明），库存 +5.6% / 段数 −0.6% / 产出 +1.1%，≤10% 验收通过
 - **AI 模块现状**：本版软件不含在线 AI；XGBoost 对最优 SS_t 回归 R²=0.020（诚实呈现），闭环页仅讲系统故事
 
+## AI 助手 / 二次开发入口
+
+- **`.claude/skills/line-side-logistics/SKILL.md`** — 仓库级 Agent Skill：Claude Code 等 AI 编程助手打开本仓库自动加载，内含架构地图、新实验组接入步骤、口径红线
+- **`llms.txt`** — 面向 LLM 的项目摘要（核心事实/技术栈/运行方式），任何 AI 抓取仓库时可直接读懂本项目
+- 改数据后固定动作：`python -m app.precompute --force && python tools/verify_data.py` 全绿再提交
+
 ## 目录结构
 
 ```
